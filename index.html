@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>todolist</title>
+	<link rel="stylesheet" type="text/css" href="./lib/materialize/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen,projection">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<header>
+	<nav>
+		<div class="nav-wrapper grey darken-2">
+			<a href="#" class="brand-logo center"><i class="material-icons left">content_paste</i>ToDoList</a>
+		</div>
+	</nav>
+</header>
+<main class="indigo lighten-4" id="main-app">
+	<div class="container">
+		<div class="row">
+			<form class="col s8 offset-s2">
+				<div class="input-field">
+					<input @keyup.enter="add"  type="text" class="validate" v-model="notetxt">
+					<label for="text-input">NoteHere:</label>
+				</div>
+				<a href="#!" class="btn waves-effect waves-light right red" style="margin-left: 5px;" v-on:click="rewrite">重写</a>
+				<a href="#!" class="btn waves-effect waves-light right" v-on:click="add" >添加</a>
+			</form>
+		</div>
+		<div class="notes-area">
+			<div class="row">
+				<div class="col s8 offset-s2">
+					<div class="divider"></div>
+					<h4 class="center brown-text">Notes</h4>
+					<div class="divider"></div>
+					<ul>
+					<!-- 列表循环 -->
+						<li v-for="(note,index) in MyNotes" class="col s6">
+							<div class="card-panel teal white-text" >
+								<a href="#!" class="right" @click="deleteA(index)" >
+									<i class="material-icons red-text text-lighten-3">close</i>
+								</a>
+
+								<p>{{note}}</p>
+							</div>
+					    </li>
+					</ul>
+					<p class="white-text center" v-show="MyNotes.length==0">There Are No Notes Here...</p>
+
+				</div>
+			</div>
+			<!-- 翻页 -->
+			<!-- <div class="row">
+				<div class="col s8 offset-s2 center">
+					<ul class="pagination">
+					<li >
+						<a href="#!"><i class="material-icons">chevron_left</i></a>
+					</li>
+					
+					<li>
+						<a href="#!"><i class="material-icons">chevron_right</i></a>
+					</li>
+				</ul>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	
+	<!-- 模态框 -->
+	<div class="modal" id="modal-note">
+		<div class="modal-content center">
+			<h4 class="red-text">Warning!</h4>
+			<p>删除所有记录？</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">No</a>
+
+			<a href="#!" v-on:click="deleteAll" class="modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+		</div>
+	</div>
+	
+	
+		
+</main>
+	
+	<a href="#modal-note" class="delall btn indigo lighten-4 waves-effect waves-red right" v-show="MyNotes.length!=0">删除全部</a>
+
+	<script type="text/javascript" src="./lib/jQuery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="./lib/vuejs/vue.min.js"></script>
+	<script type="text/javascript" src="./lib/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

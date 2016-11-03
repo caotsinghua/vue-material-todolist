@@ -1,0 +1,31 @@
+window.onload=function(){
+	$(".delall").click(function(){
+		$(".modal").openModal();
+	})
+
+	var vm=new Vue({
+		el:"#main-app",
+		data:{
+			MyNotes:[],
+			notetxt:"",
+			index:""
+		},
+		methods:{
+			add:function(){
+					if(this.notetxt){
+						this.MyNotes.push(this.notetxt);
+					this.notetxt="";
+					}
+			},
+			deleteAll:function(){
+				this.MyNotes=[];
+			},
+			deleteA:function(index){
+				this.MyNotes.splice(index,1);
+			},
+			rewrite:function(){
+				this.notetxt="";
+			}
+		}
+	})
+}
